@@ -49,6 +49,23 @@
 					else
 					{
 						echo "Data Inserted succesfully";
+						"<br /> ";
+						
+						$sql = "select * from sign_up";
+						$res = mysqli_query($conn,$sql);
+						if(!$res)
+						{
+							die("query failed");
+						}
+						while($row=mysqli_fetch_assoc($res))
+						{
+							foreach($row as $key=>$val)
+							{
+								echo ucfirst($key). ": {$val}<br />"; //camelcase implemented
+							}
+							echo "<br /><hr /><br />";
+						}
+						mysqli_free_result($res);
 					}
 				}
 		}
