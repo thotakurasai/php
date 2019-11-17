@@ -14,21 +14,18 @@
 	<body>
 		<p> query the database </p>
 		<?php
-			$sql = "select * from student_info";
+			$sql = "update student_info ".
+					"set name='chaitanya', dob='1998/02/02' ".
+					"where id=3";
 			$res = mysqli_query($conn,$sql);
 			if(!$res)
 			{
 				die("query failed");
 			}
-			while($row=mysqli_fetch_assoc($res))
+			else
 			{
-				foreach($row as $key=>$val)
-				{
-					echo "{$key}:" ."{$val}<br />";
-				}
-				echo "<br /><hr /><br />";
+				echo "updated succesfully";
 			}
-			mysqli_free_result($res);
 		?>
 	</body>
 </html>

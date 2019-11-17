@@ -24,7 +24,7 @@
 			{
 				foreach($row as $key=>$val)
 				{
-					echo "{$key}:" ."{$val}<br />";
+					echo ucfirst($key). ": {$val}<br />"; //camelcase implemented
 				}
 				echo "<br /><hr /><br />";
 			}

@@ -14,21 +14,18 @@
 	<body>
 		<p> query the database </p>
 		<?php
-			$sql = "select * from student_info";
+			$sql = "insert into student_info(name,dob)".
+					"values('suhas', '1998/09/08'),".
+					"('ajay', '1998/09/06')";
 			$res = mysqli_query($conn,$sql);
 			if(!$res)
 			{
 				die("query failed");
 			}
-			while($row=mysqli_fetch_assoc($res))
+			else
 			{
-				foreach($row as $key=>$val)
-				{
-					echo "{$key}:" ."{$val}<br />";
-				}
-				echo "<br /><hr /><br />";
+				echo "created succesfully";
 			}
-			mysqli_free_result($res);
 		?>
 	</body>
 </html>
