@@ -2,12 +2,22 @@
 
 session_start();
 
+if (isset($_GET['logout'])){
+			session_destroy();
+			unset($_SESSION['id']);
+			unset($_SESSION['username']);
+			unset($_SESSION['email']);
+			unset($_SESSION['verified']);
+			header('location: login.php');
+			exit();
+		}
+
 require 'db.php';
 
 $errors = array();
 $username="";
 $email="";
-
+//d
 	if(isset($_POST['signups-btn']))
 	{
 		$username= $_POST['username'];
@@ -50,11 +60,11 @@ $email="";
 		{
 			$password = password_hash($password, PASSWORD_DEFAULT);
 			$token = bin2hex(random_bytes(50));
-			$verified = false;
+			$verified = 0;
 			
 			$sql = "insert into users(username,email,verified,token,password) values(?,?,?,?,?)";
 			$stmt = $conn->prepare($sql);
-			$stmt->bind_param('ssbss',$username,$email,$verified,$token,$password);
+			$stmt->bind_param('ssiss',$username,$email,$verified,$token,$password);
 			if($stmt->execute())
 			{
 				$user_id = $conn->insert_id;
@@ -65,11 +75,14 @@ $email="";
 				
 				$_SESSION['message'] = "you are now logged in";
 				$_SESSION['alert-class'] = "alert-success";
-				header('location:homepage.php');
+				header('location: homepage.php');
 				exit();
 			}
 			else{
-				$errors['db_error'] = "Database error: failed to register";
+				// echo "\nPDOStatement::errorInfo():\n";
+				// $arr = $stmt->errorInfo();
+				// $errors['db_error'] = "Database error: failed to register";
+				$errors['db_error'] =  $conn->error;
 			}
 			
 		}
@@ -80,7 +93,7 @@ $email="";
 	if(isset($_POST['login-btn']))
 	{
 		$username= $_POST['username'];
-		$password= $_POST['gender'];
+		$password= $_POST['password'];
 		
 		if (empty($username))
 		{
@@ -120,15 +133,7 @@ $email="";
 		
 		
 		
-		if (isset($_GET['logout'])){
-			session_destroy();
-			unset($_SESSION['id']);
-			unset($_SESSION['username']);
-			unset($_SESSION['email']);
-			unset($_SESSION['verified']);
-			header('location: login.php');
-			exit();
-		}
+		
 		
 	}
 ?>
