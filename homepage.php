@@ -3,7 +3,44 @@ if(!isset($_SESSION['id'])){
 	header('location: login.php');
 	exit();
 }
+
+/*function getPosts()
+{
+	$posts = array();
+	$posts[0] = $_POST['id'];
+	$posts[1] = $_POST['username'];
+	$posts[2] = $_POST['email'];
+	return $posts;
+	
+}
+
+if(isset($_POST['search']))
+{
+	$data = getPosts();
+	
+	$searchQuery = "select * from users where id=data[0]";
+	
+	$search_Result = mysqli_query($connect, $search_query);
+	
+	if($search_Result)
+	{
+		if(mysqli_num_rows($search_Result))
+		{
+			while($row = mysqli_fetch_array($search_Results))
+			{
+				$id = $row['id'];
+				$username = $row['username'];
+				$email = $row['email'];
+			}
+		}else{
+			echo "No data for this ID";
+		}
+		}else{
+			echo "result error";
+	}
+}*/
 ?>
+
 
 <html lang="en">
 	<head>
@@ -16,6 +53,16 @@ if(!isset($_SESSION['id'])){
 	</head>
 	
 	<body>
+		<!--<form action="homepage.php" method="post">
+			<input type="number" name="id" placeholder="id" value="<?php echo $user_id; ?>"><br><br>
+			<input type="number" name="username" placeholder="username" value="<?php echo $username; ?>"><br><br>
+			<input type="number" name="email" placeholder="email" value="<?php echo $email; ?>"><br><br>
+			<div>
+				<input type="submit" name="update" value="Add">
+				<input type="submit" name="delete" value="Delete">
+				<input type="submit" name="search" value="Find">
+			</div>
+		</form>-->
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4 offset-md-4 form-div login">
@@ -48,5 +95,6 @@ if(!isset($_SESSION['id'])){
 				</div>
 			</div>
 		</div>
+		
 	</body>
 </html>
