@@ -1,7 +1,8 @@
-<?php require_once "authController.php"; 
+<?php require_once 'authController.php'; 
 if(!isset($_SESSION['id'])){
 	header('location: login.php');
 	exit();
+}
 ?>
 
 <html lang="en">
@@ -17,12 +18,12 @@ if(!isset($_SESSION['id'])){
 	<body>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4 offset-md-4 form-div">
+				<div class="col-md-4 offset-md-4 form-div login">
 					
 					<?php if(isset($_SESSION['message'])): ?>
 					
 						<div class="alert <?php echo $_SESSION['alert-class']; ?> ">
-							<?php echo $_SESSION['message'];
+							<?php echo ($_SESSION['message']);
 								unset($_SESSION['message']);
 								unset($_SESSION['alert-class']);
 							?>
